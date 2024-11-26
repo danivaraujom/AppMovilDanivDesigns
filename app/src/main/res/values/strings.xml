@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">AppMovilDanivDesigns</string>
+    <string name="añadirCesta">Añadir a la cesta</string>
+    <string name="busca">Buscar</string>
+    <string name="usuario">Usuario</string>
+    <string name="favoritos">Favoritos</string>
+    <string name="cesta">Cesta</string>
+    <string name="home">Inicio</string>
+    <string name="modo_claro">Claro</string>
+    <string name="modo_oscuro">Oscuro</string>
+    <string name="menu">Menú</string>
+    <string name="nombreProducto">Nombre del producto</string>
+    <string name="descripcionProducto">Descripción breve del producto</string>
+    <string name="precioProducto">Precio 0.00€</string>
+    <string name="fotoProducto">Foto del producto</string>
+</resources>
