@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity implements ProductoAdapter.O
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        // Inicializa RecyclerView
+        // Se inicializa el RecyclerView
         recyclerView = findViewById(R.id.listaProductos);
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 
@@ -107,21 +107,20 @@ public class MainActivity extends AppCompatActivity implements ProductoAdapter.O
             mostrarMensaje("Inicio seleccionado");
             adaptadorProductos.actualizarLista(listaProductos);
         });
-        btnCesta.setOnClickListener(v -> mostrarProductosCesta());
-        btnFavorites.setOnClickListener(v -> filtrarFavoritos());
+        btnCesta.setOnClickListener(v -> {
+            mostrarMensaje("Cesta");
+            mostrarProductosCesta();
+        });
+        btnFavorites.setOnClickListener(v -> {
+            mostrarMensaje("Favoritos");
+            filtrarFavoritos();
+        });
         btnUsuario.setOnClickListener(v -> mostrarMensaje("Perfil de Usuario deshabilitado"));
     }
+
     // Muestra un mensaje en la pantalla (Toast)
     private void mostrarMensaje(String mensaje) {
         Toast.makeText(this, mensaje, Toast.LENGTH_SHORT).show();
-    }
-    // Actualiza la lista de productos en el RecyclerView
-    private void actualizarLista(List<Producto> filtro) {
-        try {
-            adaptadorProductos.actualizarLista(filtro.isEmpty() ? listaProductos : filtro);
-        } catch (Exception e) {
-            Log.e(TAG, "Error al actualizar la lista: ", e);
-        }
     }
 
     // Filtra los productos favoritos
@@ -133,7 +132,7 @@ public class MainActivity extends AppCompatActivity implements ProductoAdapter.O
                     listaFavoritos.add(producto);
                 }
             }
-            actualizarLista(listaFavoritos);
+            adaptadorProductos.actualizarLista(listaFavoritos);
         } catch (Exception e) {
             Log.e(TAG, "Error al filtrar favoritos: ", e);
         }
@@ -143,7 +142,8 @@ public class MainActivity extends AppCompatActivity implements ProductoAdapter.O
     private void mostrarProductosCesta() {
         try {
             if (cestaProductos.isEmpty()) {
-                Toast.makeText(this, "Cesta vacía", Toast.LENGTH_SHORT).show();
+                Log.w(TAG, "La cesta está vacía");
+               adaptadorProductos.actualizarLista(new ArrayList<>());
             } else {
                 adaptadorProductos.actualizarLista(cestaProductos);
             }
@@ -156,14 +156,21 @@ public class MainActivity extends AppCompatActivity implements ProductoAdapter.O
     @Override
     public void onClickFavorito(int position) {
         try {
-            Producto producto = listaProductos.get(position);
-            producto.setEsFavorito(!producto.esProductoFavorito());
-            adaptadorProductos.notifyItemChanged(position);
-            mostrarMensaje(producto.esProductoFavorito() ? "Añadido a favoritos" : "Eliminado de favoritos");
+            Producto producto = adaptadorProductos.getListaProductos().get(position);
+            boolean esFavorito = !producto.esProductoFavorito();
+            producto.setEsFavorito(esFavorito);
+            if (esFavorito) {
+                adaptadorProductos.notifyItemChanged(position);
+            } else {
+                adaptadorProductos.getListaProductos().remove(position);
+                adaptadorProductos.notifyItemRemoved(position);
+            }
+            mostrarMensaje(esFavorito ? "Añadido a favoritos" : "Eliminado de favoritos");
         } catch (Exception e) {
             Log.e(TAG, "Error al gestionar favoritos: ", e);
         }
     }
+
     // Método al hacer clic en el botón de "añadir a la cesta"
     @Override
     public void onClickAñadirCesta(int position) {
@@ -173,7 +180,8 @@ public class MainActivity extends AppCompatActivity implements ProductoAdapter.O
                 cestaProductos.add(producto);
                 mostrarMensaje("Producto añadido a la cesta");
             } else {
-                mostrarMensaje("El producto ya está en la cesta");
+                Log.w(TAG, "El producto ya estaba en la cesta - " + producto.getNombre());
+                mostrarMensaje("El producto ya esta en la cesta");
             }
         } catch (Exception e) {
             Log.e(TAG, "Error al añadir producto a la cesta: ", e);

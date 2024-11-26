@@ -66,8 +66,8 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.Produc
     }
 
     public interface OnItemClickListener {
-        void onClickFavorito(int posicion);
-        void onClickAñadirCesta(int posicion);
+        void onClickFavorito(int position);
+        void onClickAñadirCesta(int position);
     }
     // ViewHolder que contiene las vistas de cada elemento del RecyclerView
     public static class ProductoViewHolder extends RecyclerView.ViewHolder {
@@ -87,6 +87,30 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.Produc
             botonFavorito = itemView.findViewById(R.id.botonFavorito);
             botonAñadir = itemView.findViewById(R.id.btnAñadir);
         }
+    }
+
+    public List<Producto> getListaProductos() {
+        return listaProductos;
+    }
+
+    public void setListaProductos(List<Producto> listaProductos) {
+        this.listaProductos = listaProductos;
+    }
+
+    public Context getContexto() {
+        return contexto;
+    }
+
+    public void setContexto(Context contexto) {
+        this.contexto = contexto;
+    }
+
+    public OnItemClickListener getListener() {
+        return listener;
+    }
+
+    public void setListener(OnItemClickListener listener) {
+        this.listener = listener;
     }
 }
 
