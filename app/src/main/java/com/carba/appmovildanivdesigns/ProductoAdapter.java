@@ -44,14 +44,13 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.Produc
         holder.descripcionProducto.setText(producto.getDescripcion());
         holder.precioProducto.setText(String.format("%.2f €", producto.getPrecio()));
         holder.fotoProducto.setImageResource(producto.getImagen());
-        // Cambia el icono del botonFavorito según si el producto es favorito
+        // Cambia el icono del botonFavorito segun si el producto es favorito
         holder.botonFavorito.setImageResource(producto.esProductoFavorito() ? R.drawable.icono_si_favorito : R.drawable.icono_no_favorito);
         holder.botonFavorito.setOnClickListener(v -> {
             if (listener != null) {
                 listener.onClickFavorito(position);
             }
         });
-
         // Boton para añadir el producto a la cesta
         holder.botonAñadir.setOnClickListener(v -> {
             if (listener != null) {

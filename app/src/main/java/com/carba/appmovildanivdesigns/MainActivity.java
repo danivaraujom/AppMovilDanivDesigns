@@ -107,14 +107,8 @@ public class MainActivity extends AppCompatActivity implements ProductoAdapter.O
             mostrarMensaje("Inicio seleccionado");
             adaptadorProductos.actualizarLista(listaProductos);
         });
-        btnCesta.setOnClickListener(v -> {
-            mostrarMensaje("Cesta");
-            mostrarProductosCesta();
-        });
-        btnFavorites.setOnClickListener(v -> {
-            mostrarMensaje("Favoritos");
-            filtrarFavoritos();
-        });
+        btnCesta.setOnClickListener(v -> mostrarProductosCesta());
+        btnFavorites.setOnClickListener(v -> filtrarFavoritos());
         btnUsuario.setOnClickListener(v -> mostrarMensaje("Perfil de Usuario deshabilitado"));
     }
 
@@ -142,7 +136,8 @@ public class MainActivity extends AppCompatActivity implements ProductoAdapter.O
     private void mostrarProductosCesta() {
         try {
             if (cestaProductos.isEmpty()) {
-                Log.w(TAG, "La cesta está vacía");
+                Log.w(TAG, "La cesta esta vacia");
+                mostrarMensaje("Cesta vacia");
                adaptadorProductos.actualizarLista(new ArrayList<>());
             } else {
                 adaptadorProductos.actualizarLista(cestaProductos);
