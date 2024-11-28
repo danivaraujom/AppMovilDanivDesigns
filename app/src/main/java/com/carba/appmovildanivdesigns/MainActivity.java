@@ -147,7 +147,7 @@ public class MainActivity extends AppCompatActivity implements ProductoAdapter.O
         }
     }
 
-    // Método al hacer clic en el botón de "favorito"
+    // Método al hacer clic en el boton de "favorito"
     @Override
     public void onClickFavorito(int position) {
         try {
@@ -166,7 +166,7 @@ public class MainActivity extends AppCompatActivity implements ProductoAdapter.O
         }
     }
 
-    // Método al hacer clic en el botón de "añadir a la cesta"
+    // Método al hacer clic en el boton de "añadir a la cesta"
     @Override
     public void onClickAñadirCesta(int position) {
         try {
