@@ -18,6 +18,8 @@ import androidx.appcompat.app.AppCompatDelegate;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.tabs.TabLayout;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -92,6 +94,28 @@ public class MainActivity extends AppCompatActivity implements ProductoAdapter.O
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
             } else {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+            }
+        });
+
+        //Incluir TabLayout
+        TabLayout tabLayout = findViewById(R.id.tabLayout);
+        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_home).setText("Home"));
+        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_cesta).setText("Cesta"));
+        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_favorito).setText("Favoritos"));
+        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_usuario).setText("Usuario deshabilitado"));
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                // Acción al seleccionar una pestaña
+                Log.d("TabLayout", "Tab seleccionada: " + tab.getText());
+            }
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+                // Acción al deseleccionar una pestaña
+            }
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+                // Acción al volver a seleccionar una pestaña
             }
         });
 
