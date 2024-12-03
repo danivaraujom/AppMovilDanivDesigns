@@ -54,22 +54,22 @@ public class MainActivity extends AppCompatActivity implements ProductoAdapter.O
 
         // Lista de productos con el nombre, descripcion, precio y la foto del producto
         listaProductos = new ArrayList<>(Arrays.asList(
-                new Producto("Pulsera Arcoiris Brillante", "Pulsera hecha a mano con cuentas brillantes de colores arcoiris.", 4.99, R.drawable.pulsera6, false),
-                new Producto("Pulsera Natural Zen", "Pulsera de cuentas de madera natural con un diseño sencillo y elegante.", 5.99, R.drawable.pulsera2, false),
-                new Producto("Pulsera Bohemia", "Diseño bohemio con cuentas de colores y detalles de hilo tejidos a mano.", 6.49, R.drawable.pulsera3, false),
-                new Producto("Pulsera de Cristal Místico", "Pulsera con cuentas de cristal translúcido que reflejan la luz.", 7.99, R.drawable.pulsera4, false),
-                new Producto("Pulsera de Amistad", "Pulsera hecha con nudos de colores para celebrar la amistad.", 3.99, R.drawable.pulsera5, false),
-                new Producto("Pulsera Elegante de Perlas", "Pulsera con perlas sintéticas y un diseño sofisticado.", 9.49, R.drawable.pulsera6, false),
-                new Producto("Pulsera Estilo Playero", "Pulsera con cuentas en tonos azul y arena, ideal para el verano.", 5.49, R.drawable.pulsera7, false),
-                new Producto("Pulsera Vintage", "Estilo retro con detalles metálicos y colores apagados.", 6.99, R.drawable.pulsera8, false),
-                new Producto("Pulsera de Cuarzo Rosa", "Pulsera hecha con piedras de cuarzo rosa, símbolo de amor y calma.", 12.99, R.drawable.pulsera2, false),
-                new Producto("Pulsera Minimalista Negra", "Diseño sencillo con cuentas negras mate, ideal para cualquier ocasión.", 4.99, R.drawable.pulsera10, false),
-                new Producto("Pulsera Tribal", "Pulsera con motivos tribales y colores intensos.", 7.49, R.drawable.pulsera11, false),
-                new Producto("Pulsera de Hilo Multicolor", "Pulsera tejida a mano con hilos de colores vibrantes.", 3.49, R.drawable.pulsera12, false),
-                new Producto("Pulsera con Colgantes", "Pulsera con pequeños colgantes metálicos en forma de estrellas y lunas.", 8.99, R.drawable.pulsera13, false),
-                new Producto("Pulsera Natural", "Hecha con materiales reciclados y un diseño ecológico.", 5.99, R.drawable.pulsera14, false),
-                new Producto("Pulsera de Aventurina", "Pulsera con piedras de aventurina verde, conocida por atraer la prosperidad.", 10.99, R.drawable.pulsera15, false),
-                new Producto("Pulsera Floral", "Pulsera con cuentas en forma de pequeñas flores y colores suaves.", 6.49, R.drawable.pulsera16, false)
+                new Producto("Pulsera Arcoiris Brillante", "Pulsera hecha a mano con cuentas brillantes de colores arcoiris.", 4.99, R.drawable.pulsera6, false,"pulsera"),
+                new Producto("Pulsera Natural Zen", "Pulsera de cuentas de madera natural con un diseño sencillo y elegante.", 5.99, R.drawable.pulsera2, false,"pulsera"),
+                new Producto("Pulsera Bohemia", "Diseño bohemio con cuentas de colores y detalles de hilo tejidos a mano.", 6.49, R.drawable.pulsera3, false,"pulsera"),
+                new Producto("Pulsera de Cristal Místico", "Pulsera con cuentas de cristal translúcido que reflejan la luz.", 7.99, R.drawable.pulsera4, false,"pulsera"),
+                new Producto("Pulsera de Amistad", "Pulsera hecha con nudos de colores para celebrar la amistad.", 3.99, R.drawable.pulsera5, false,"pulsera"),
+                new Producto("Pulsera Elegante de Perlas", "Pulsera con perlas sintéticas y un diseño sofisticado.", 9.49, R.drawable.pulsera6, false,"pulsera"),
+                new Producto("Pulsera Estilo Playero", "Pulsera con cuentas en tonos azul y arena, ideal para el verano.", 5.49, R.drawable.pulsera7, false,"pulsera"),
+                new Producto("Pulsera Vintage", "Estilo retro con detalles metálicos y colores apagados.", 6.99, R.drawable.pulsera8, false,"pulsera"),
+                new Producto("Pulsera de Cuarzo Rosa", "Pulsera hecha con piedras de cuarzo rosa, símbolo de amor y calma.", 12.99, R.drawable.pulsera2, false,"pulsera"),
+                new Producto("Pulsera Minimalista Negra", "Diseño sencillo con cuentas negras mate, ideal para cualquier ocasión.", 4.99, R.drawable.pulsera10, false,"pulsera"),
+                new Producto("Pulsera Tribal", "Pulsera con motivos tribales y colores intensos.", 7.49, R.drawable.pulsera11, false,"pulsera"),
+                new Producto("Pulsera de Hilo Multicolor", "Pulsera tejida a mano con hilos de colores vibrantes.", 3.49, R.drawable.pulsera12, false,"pulsera"),
+                new Producto("Pulsera con Colgantes", "Pulsera con pequeños colgantes metálicos en forma de estrellas y lunas.", 8.99, R.drawable.pulsera13, false,"pulsera"),
+                new Producto("Pulsera Natural", "Hecha con materiales reciclados y un diseño ecológico.", 5.99, R.drawable.pulsera14, false,"pulsera"),
+                new Producto("Pulsera de Aventurina", "Pulsera con piedras de aventurina verde, conocida por atraer la prosperidad.", 10.99, R.drawable.pulsera15, false,"pulsera"),
+                new Producto("Pulsera Floral", "Pulsera con cuentas en forma de pequeñas flores y colores suaves.", 6.49, R.drawable.pulsera16, false,"pulsera")
         ));
 
         cestaProductos = new ArrayList<>();
@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity implements ProductoAdapter.O
         ImageButton iconoMensaje = findViewById(R.id.btnMensaje);
         ImageButton iconoMenu = findViewById(R.id.btnMenu);
 
-        // Acciones de los botones
+        // Acciones al hacer clic en los botones de la barra superior
         iconoMenu.setOnClickListener(view -> showPopUpMenu(view));
         iconoInsta.setOnClickListener(v -> mostrarMensaje("Instagram: @danivdesigns_"));
         iconoLlamada.setOnClickListener(v -> mostrarMensaje("Número de teléfono: 669392358"));
@@ -92,6 +92,7 @@ public class MainActivity extends AppCompatActivity implements ProductoAdapter.O
         // Buscador deshabilitado (funcionalidad no implementada)
         SearchView iconoBuscarLista = findViewById(R.id.buscador);
 
+        // Uso del Switch para cambiar el modo de tema claro/oscuro
         switchModo = findViewById(R.id.switchModo);
         switchModo.setOnClickListener(view -> mostrarMensaje("Ha cambiado de modo"));
         switchModo.setOnCheckedChangeListener((buttonView, isChecked) -> {
@@ -101,7 +102,7 @@ public class MainActivity extends AppCompatActivity implements ProductoAdapter.O
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
             }
         });
-
+        // Barra inferior con un TabLayout
         TabLayout tabLayout = findViewById(R.id.tabLayout);
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -214,10 +215,10 @@ public class MainActivity extends AppCompatActivity implements ProductoAdapter.O
 
         popupMenu.setOnMenuItemClickListener(item -> {
             if (item.getItemId() == R.id.pulsera) {
-                filtrarPorTipo("pulsera");
+                filtrarPorTipo(getString(R.string.pulsera));
                 return true;
             } else if (item.getItemId() == R.id.collar) {
-                filtrarPorTipo("collar");
+                filtrarPorTipo(getString(R.string.collar));
                 return true;
             } else {
                 return false;

@@ -6,13 +6,15 @@ public class Producto {
     private double precio;
     private int imagen;
     private boolean esFavorito;
+    private String tipo;
 
-    public Producto(String nombre, String descripcion, double precio, int imagen,boolean esFavorito) {
+    public Producto(String nombre, String descripcion, double precio, int imagen, boolean esFavorito, String tipo) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.precio = precio;
         this.imagen = imagen;
-        this.esFavorito= esFavorito;
+        this.esFavorito = esFavorito;
+        this.tipo = tipo;
     }
 
     public String getNombre() {
@@ -55,6 +57,14 @@ public class Producto {
         this.esFavorito = esFavorito;
     }
 
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
     @Override
     public String toString() {
         return "Producto{" +
@@ -63,10 +73,7 @@ public class Producto {
                 ", precio=" + precio +
                 ", imagen=" + imagen +
                 ", esFavorito=" + esFavorito +
+                ", tipo='" + tipo + '\'' +
                 '}';
-    }
-
-    public Object getTipo() {
-        return null;
     }
 }

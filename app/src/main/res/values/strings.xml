@@ -13,4 +13,6 @@
     <string name="descripcionProducto">Descripción breve del producto</string>
     <string name="precioProducto">Precio 0.00€</string>
     <string name="fotoProducto">Foto del producto</string>
+    <string name="pulsera">Pulsera</string>
+    <string name="collar">Collar</string>
 </resources>
