@@ -42,7 +42,6 @@ public class MainActivity extends AppCompatActivity implements ProductoAdapter.O
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
 
-        // Ajuste de insets para la barra de estado y navegación
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -93,7 +92,6 @@ public class MainActivity extends AppCompatActivity implements ProductoAdapter.O
         // Buscador deshabilitado (funcionalidad no implementada)
         SearchView iconoBuscarLista = findViewById(R.id.buscador);
 
-        // Modo oscuro / claro con Switch
         switchModo = findViewById(R.id.switchModo);
         switchModo.setOnClickListener(view -> mostrarMensaje("Ha cambiado de modo"));
         switchModo.setOnCheckedChangeListener((buttonView, isChecked) -> {
@@ -104,7 +102,6 @@ public class MainActivity extends AppCompatActivity implements ProductoAdapter.O
             }
         });
 
-        // Incluir TabLayout
         TabLayout tabLayout = findViewById(R.id.tabLayout);
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -209,7 +206,7 @@ public class MainActivity extends AppCompatActivity implements ProductoAdapter.O
         }
     }
 
-    // Muestra el menú desplegable
+    // Menu
     private void showPopUpMenu(View view) {
         PopupMenu popupMenu = new PopupMenu(this, view);
         MenuInflater menuInflater = popupMenu.getMenuInflater();
