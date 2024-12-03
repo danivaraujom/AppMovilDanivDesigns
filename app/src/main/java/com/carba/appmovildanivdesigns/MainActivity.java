@@ -216,6 +216,7 @@ public class MainActivity extends AppCompatActivity implements ProductoAdapter.O
         menuInflater.inflate(R.menu.menu_principal, popupMenu.getMenu());
 
         popupMenu.setOnMenuItemClickListener(item -> {
+            if
             switch (item.getItemId()) {
                 case R.id.pulsera:
                     filtrarPorTipo("pulsera");
