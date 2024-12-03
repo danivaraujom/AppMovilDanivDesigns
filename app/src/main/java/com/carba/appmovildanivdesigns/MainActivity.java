@@ -216,16 +216,14 @@ public class MainActivity extends AppCompatActivity implements ProductoAdapter.O
         menuInflater.inflate(R.menu.menu_principal, popupMenu.getMenu());
 
         popupMenu.setOnMenuItemClickListener(item -> {
-            if
-            switch (item.getItemId()) {
-                case R.id.pulsera:
-                    filtrarPorTipo("pulsera");
-                    return true;
-                case R.id.collar:
-                    filtrarPorTipo("collar");
-                    return true;
-                default:
-                    return false;
+            if (item.getItemId() == R.id.pulsera) {
+                filtrarPorTipo("pulsera");
+                return true;
+            } else if (item.getItemId() == R.id.collar) {
+                filtrarPorTipo("collar");
+                return true;
+            } else {
+                return false;
             }
         });
 
