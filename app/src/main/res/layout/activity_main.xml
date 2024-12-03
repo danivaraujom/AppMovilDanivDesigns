@@ -48,66 +48,10 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
-        app:layout_constraintBottom_toTopOf="@id/barraInferior"
+        app:layout_constraintBottom_toTopOf="@id/tabLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/buscador" />
-
-    <LinearLayout
-        android:id="@+id/barraInferior"
-        android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:padding="4dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:background="@drawable/barra_inferior">
-
-        <ImageButton
-            android:id="@+id/home"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_weight="1"
-            android:background="@null"
-            android:contentDescription="@string/home"
-            android:scaleType="centerInside"
-            android:src="@drawable/ic_home" />
-
-        <ImageButton
-            android:id="@+id/cesta"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_weight="1"
-            android:background="@null"
-            android:contentDescription="@string/cesta"
-            android:scaleType="centerInside"
-            android:src="@drawable/ic_cesta" />
-
-        <ImageButton
-            android:id="@+id/favorito"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_weight="1"
-            android:background="@null"
-            android:contentDescription="@string/favoritos"
-            android:scaleType="centerInside"
-            android:src="@drawable/ic_favorito" />
-
-        <ImageButton
-            android:id="@+id/usuario"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_weight="1"
-            android:background="@null"
-            android:contentDescription="@string/usuario"
-            android:scaleType="centerInside"
-            android:src="@drawable/ic_usuario" />
-    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/barraSuperior"
@@ -180,4 +124,50 @@
             android:trackTint="@color/md_theme_secondaryContainer" />
     </LinearLayout>
 
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabLayout"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/barra_inferior"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/listaProductos"
+        app:layout_constraintVertical_bias="1.0"
+        app:tabGravity="fill"
+        app:tabIconTint="@color/md_theme_secondaryContainer"
+        app:tabIndicatorColor="@color/md_theme_primary"
+        app:tabIndicatorHeight="4dp"
+        app:tabMode="fixed"
+        app:tabRippleColor="@android:color/transparent">
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tabHome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:icon="@drawable/ic_home" />
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tabCesta"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:icon="@drawable/ic_cesta" />
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tabFavoritos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:icon="@drawable/ic_favorito" />
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tabUsuario"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:icon="@drawable/ic_usuario" />
+
+    </com.google.android.material.tabs.TabLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

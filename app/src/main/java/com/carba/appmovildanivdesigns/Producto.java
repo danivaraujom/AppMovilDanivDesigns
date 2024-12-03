@@ -65,4 +65,8 @@ public class Producto {
                 ", esFavorito=" + esFavorito +
                 '}';
     }
+
+    public Object getTipo() {
+        return null;
+    }
 }
