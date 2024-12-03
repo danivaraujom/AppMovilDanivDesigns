@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity implements ProductoAdapter.O
         ImageButton iconoMenu = findViewById(R.id.btnMenu);
 
         // Acciones al hacer clic en los botones de la barra superior
-        iconoMenu.setOnClickListener(view -> showPopUpMenu(view));
+        iconoMenu.setOnClickListener(v -> showPopUpMenu(v));
         iconoInsta.setOnClickListener(v -> mostrarMensaje("Instagram: @danivdesigns_"));
         iconoLlamada.setOnClickListener(v -> mostrarMensaje("Número de teléfono: 669392358"));
         iconoMensaje.setOnClickListener(v -> mostrarMensaje("Enviar Mensaje: ¡danivdesigns_@gmail.com!"));
@@ -110,14 +110,10 @@ public class MainActivity extends AppCompatActivity implements ProductoAdapter.O
                 int position = tab.getPosition();
                 switch (position) {
                     case 0:
-                        Snackbar.make(tabLayout, "Inicio seleccionado", Snackbar.LENGTH_SHORT)
-                                .setAction("Ver Productos", v -> adaptadorProductos.actualizarLista(listaProductos))
-                                .show();
+                        adaptadorProductos.actualizarLista(listaProductos);
                         break;
                     case 1:
-                        Snackbar.make(tabLayout, "Mostrando Cesta", Snackbar.LENGTH_SHORT)
-                                .setAction("Ver Cesta", v -> mostrarProductosCesta())
-                                .show();
+                        mostrarProductosCesta();
                         break;
                     case 2:
                         Snackbar.make(tabLayout, "Favoritos seleccionados", Snackbar.LENGTH_SHORT)
@@ -126,19 +122,23 @@ public class MainActivity extends AppCompatActivity implements ProductoAdapter.O
                         break;
                     case 3:
                         Snackbar.make(tabLayout, "Perfil de Usuario", Snackbar.LENGTH_SHORT)
-                                .setAction("Editar Perfil", v -> mostrarMensaje("Funcionalidad no implementada"))
+                                .setAction("Editar Perfil", v -> mostrarMensaje("Perfil de usuario deshabilitado"))
                                 .show();
                         break;
                     default:
-                        Snackbar.make(tabLayout, "Pestaña desconocida", Snackbar.LENGTH_SHORT).show();
                         break;
                 }
+
             }
 
             @Override
-            public void onTabUnselected(TabLayout.Tab tab) { }
+            public void onTabUnselected(TabLayout.Tab tab) {
+                // Acción al deseleccionar una pestaña
+            }
             @Override
-            public void onTabReselected(TabLayout.Tab tab) { }
+            public void onTabReselected(TabLayout.Tab tab) {
+                // Acción al volver a seleccionar una pestaña
+            }
         });
     }
 
@@ -167,7 +167,7 @@ public class MainActivity extends AppCompatActivity implements ProductoAdapter.O
         try {
             if (cestaProductos.isEmpty()) {
                 Log.w(TAG, "La cesta esta vacia");
-                mostrarMensaje("Cesta vacía");
+                mostrarMensaje("Cesta vacia");
                 adaptadorProductos.actualizarLista(new ArrayList<>());
             } else {
                 adaptadorProductos.actualizarLista(cestaProductos);
@@ -184,7 +184,13 @@ public class MainActivity extends AppCompatActivity implements ProductoAdapter.O
             Producto producto = adaptadorProductos.getListaProductos().get(position);
             boolean esFavorito = !producto.esProductoFavorito();
             producto.setEsFavorito(esFavorito);
-            adaptadorProductos.notifyItemChanged(position);
+            if (esFavorito) {
+                adaptadorProductos.notifyItemChanged(position);
+            } else {
+                adaptadorProductos.getListaProductos().remove(position);
+                adaptadorProductos.notifyItemRemoved(position);
+            }
+            mostrarMensaje(esFavorito ? "Añadido a favoritos" : "Eliminado de favoritos");
         } catch (Exception e) {
             Log.e(TAG, "Error al gestionar favoritos: ", e);
         }
@@ -200,13 +206,12 @@ public class MainActivity extends AppCompatActivity implements ProductoAdapter.O
                 mostrarMensaje("Producto añadido a la cesta");
             } else {
                 Log.w(TAG, "El producto ya estaba en la cesta - " + producto.getNombre());
-                mostrarMensaje("El producto ya está en la cesta");
+                mostrarMensaje("El producto ya esta en la cesta");
             }
         } catch (Exception e) {
             Log.e(TAG, "Error al añadir producto a la cesta: ", e);
         }
     }
-
     // Menu
     private void showPopUpMenu(View view) {
         PopupMenu popupMenu = new PopupMenu(this, view);
@@ -228,14 +233,18 @@ public class MainActivity extends AppCompatActivity implements ProductoAdapter.O
         popupMenu.show();
     }
 
-    // Filtra los productos por tipo
     private void filtrarPorTipo(String tipo) {
+        Log.d(TAG, "Filtrando productos por tipo: " + tipo);
         List<Producto> productosFiltrados = new ArrayList<>();
         for (Producto producto : listaProductos) {
-            if (producto.getTipo().equals(tipo)) {
+            if (producto.getTipo().equalsIgnoreCase(tipo)) {
                 productosFiltrados.add(producto);
             }
         }
         adaptadorProductos.actualizarLista(productosFiltrados);
+        if (productosFiltrados.isEmpty()) {
+            mostrarMensaje("No hay productos para " + tipo);
+        }
     }
+
 }
