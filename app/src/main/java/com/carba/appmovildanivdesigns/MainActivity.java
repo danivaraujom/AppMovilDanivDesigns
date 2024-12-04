@@ -97,6 +97,7 @@ public class MainActivity extends AppCompatActivity implements ProductoAdapter.O
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 1);
         recyclerView.setLayoutManager(gridLayoutManager);
 
+        // Orientación de la pantalla
         int orientation = getResources().getConfiguration().orientation;
         if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
             gridLayoutManager.setSpanCount(2);

@@ -8,8 +8,8 @@
 
     <ImageView
         android:id="@+id/imagenLogotipo"
-        android:layout_width="503dp"
-        android:layout_height="226dp"
+        android:layout_width="314dp"
+        android:layout_height="44dp"
         android:layout_marginTop="70dp"
         android:src="@drawable/logoo"
         app:layout_constraintEnd_toEndOf="parent"
