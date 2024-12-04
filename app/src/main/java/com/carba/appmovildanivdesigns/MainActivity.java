@@ -1,5 +1,6 @@
 package com.carba.appmovildanivdesigns;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,6 +19,7 @@ import android.widget.Switch;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -91,6 +93,16 @@ public class MainActivity extends AppCompatActivity implements ProductoAdapter.O
 
         // Buscador deshabilitado (funcionalidad no implementada)
         SearchView iconoBuscarLista = findViewById(R.id.buscador);
+
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 1);
+        recyclerView.setLayoutManager(gridLayoutManager);
+
+        int orientation = getResources().getConfiguration().orientation;
+        if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            gridLayoutManager.setSpanCount(2);
+        } else {
+            gridLayoutManager.setSpanCount(1);
+        }
 
         // Uso del Switch para cambiar el modo de tema claro/oscuro
         switchModo = findViewById(R.id.switchModo);
