@@ -3,4 +3,5 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".BlankFragment"/>
+    android:background="@color/icono_buscar_background"
+    tools:context=".BlankFragment" />
