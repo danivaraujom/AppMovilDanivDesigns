@@ -72,6 +72,10 @@ public class MainActivity extends AppCompatActivity implements ProductoAdapter.O
                 new Producto("Pulsera Floral", "Pulsera con cuentas en forma de pequeñas flores y colores suaves.", 6.49, R.drawable.pulsera16, false,"pulsera")
         ));
 
+        // Fragment en el recycler
+        BlankFragment fragmentoLista= new BlankFragment(listaProductos);
+        getSupportFragmentManager().beginTransaction().add(R.id.fragmentContainerView,fragmentoLista).commit();
+
         cestaProductos = new ArrayList<>();
         adaptadorProductos = new ProductoAdapter(listaProductos, this, this);
         recyclerView.setAdapter(adaptadorProductos);
