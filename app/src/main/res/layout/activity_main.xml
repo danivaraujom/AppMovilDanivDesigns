@@ -49,7 +49,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
-        app:layout_constraintBottom_toTopOf="@id/tabLayout"
+        app:layout_constraintBottom_toTopOf="@id/bottomNavigationView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/buscador"
@@ -63,7 +63,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
-        app:layout_constraintBottom_toTopOf="@id/tabLayout"
+        app:layout_constraintBottom_toTopOf="@id/bottomNavigationView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/buscador" />
@@ -139,50 +139,21 @@
             android:trackTint="@color/md_theme_secondaryContainer" />
     </LinearLayout>
 
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tabLayout"
-        android:layout_width="match_parent"
-        android:layout_height="56dp"
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigationView"
+        android:layout_width="388dp"
+        android:layout_height="73dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
         android:background="@drawable/barra_inferior"
+        app:itemIconTint="@color/md_theme_onPrimary_mediumContrast"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/listaProductos"
-        app:layout_constraintVertical_bias="1.0"
-        app:tabGravity="fill"
-        app:tabIconTint="@color/md_theme_secondaryContainer"
-        app:tabIndicatorColor="@color/md_theme_primary"
-        app:tabIndicatorHeight="4dp"
-        app:tabMode="fixed"
-        app:tabRippleColor="@android:color/transparent">
+        app:menu="@menu/menu_barra_inferior" />
 
-        <com.google.android.material.tabs.TabItem
-            android:id="@+id/tabHome"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:icon="@drawable/ic_home" />
 
-        <com.google.android.material.tabs.TabItem
-            android:id="@+id/tabCesta"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:icon="@drawable/ic_cesta" />
-
-        <com.google.android.material.tabs.TabItem
-            android:id="@+id/tabFavoritos"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:icon="@drawable/ic_favorito" />
-
-        <com.google.android.material.tabs.TabItem
-            android:id="@+id/tabUsuario"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:icon="@drawable/ic_usuario" />
-
-    </com.google.android.material.tabs.TabLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

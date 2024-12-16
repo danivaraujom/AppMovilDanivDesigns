@@ -17,7 +17,12 @@ public class Producto implements Parcelable {
 
     }
     protected Producto(Parcel in){
-
+        nombre = in.readString();
+        descripcion = in.readString();
+        precio = in.readDouble();
+        imagen = in.readInt();
+        esFavorito = in.readByte() != 0; // Convertir byte a boolean
+        tipo = in.readString();
     }
 
     public Producto(String nombre, String descripcion, double precio, int imagen, boolean esFavorito, String tipo) {
@@ -28,6 +33,18 @@ public class Producto implements Parcelable {
         this.esFavorito = esFavorito;
         this.tipo = tipo;
     }
+
+    public final Creator<Producto> CREATOR = new Creator<Producto>() {
+        @Override
+        public Producto createFromParcel(Parcel in) {
+            return new Producto(in);
+        }
+
+        @Override
+        public Producto[] newArray(int size) {
+            return new Producto[size];
+        }
+    };
 
     public String getNombre() {
         return nombre;
@@ -100,10 +117,11 @@ public class Producto implements Parcelable {
         parcel.writeString(descripcion);
         parcel.writeDouble(precio);
         parcel.writeInt(imagen);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-            parcel.writeBoolean(esFavorito);
-        }
+        parcel.writeByte((byte) (esFavorito ? 1 : 0));
         parcel.writeString(tipo);
+        }
 
     }
-}
+
+
+

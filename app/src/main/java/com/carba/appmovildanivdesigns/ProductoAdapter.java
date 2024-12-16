@@ -21,7 +21,7 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.Produc
     private OnItemClickListener listener;
 
     // Constructor del adaptador
-    public ProductoAdapter(List<Producto> listaProductos, Context contexto, OnItemClickListener listener) {
+    public ProductoAdapter(List<Producto> listaProductos, Context contexto, OnItemClickListener listener, Object o) {
         this.listaProductos = listaProductos;
         this.contexto = contexto;
         this.listener = listener;

@@ -1,7 +1,10 @@
 package com.carba.appmovildanivdesigns;
 
+import static android.text.TextUtils.replace;
+
 import android.os.Bundle;
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -21,8 +24,9 @@ import androidx.appcompat.app.AppCompatDelegate;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.snackbar.Snackbar;
-import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -73,11 +77,11 @@ public class MainActivity extends AppCompatActivity implements ProductoAdapter.O
         ));
 
         // Fragment en el recycler
-        BlankFragment fragmentoLista= new BlankFragment(listaProductos);
-        getSupportFragmentManager().beginTransaction().add(R.id.fragmentContainerView,fragmentoLista).commit();
+//        BlankFragment fragmentoLista= new BlankFragment(listaProductos);
+//        getSupportFragmentManager().beginTransaction().add(R.id.fragmentContainerView,fragmentoLista).commit();
 
         cestaProductos = new ArrayList<>();
-        adaptadorProductos = new ProductoAdapter(listaProductos, this, this);
+        adaptadorProductos = new ProductoAdapter(listaProductos, this, this, null);
         recyclerView.setAdapter(adaptadorProductos);
 
         // Barra superior
@@ -96,6 +100,29 @@ public class MainActivity extends AppCompatActivity implements ProductoAdapter.O
         // Buscador deshabilitado (funcionalidad no implementada)
         SearchView iconoBuscarLista = findViewById(R.id.buscador);
 
+        // Barra inferior de Navegacion
+        BottomNavigationView btnNav= findViewById(R.id.bottomNavigationView);
+        btnNav.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                if (item.getItemId()==R.id.ic_home1) {
+                    adaptadorProductos.actualizarLista(listaProductos);
+                    getSupportFragmentManager().beginTransaction().setReorderingAllowed(true).replace(R.id.fragmentContainerView, new BlankFragment(listaProductos)).commit();
+                } else if (item.getItemId()==R.id.ic_cesta) {
+                    mostrarProductosCesta();
+                    getSupportFragmentManager().beginTransaction().setReorderingAllowed(true).add(R.id.fragmentContainerView, new CestaFragment(cestaProductos)).commit();
+                } else if (item.getItemId()==R.id.ic_favoritos) {
+                    Snackbar.make(btnNav, "Favoritos seleccionados", Snackbar.LENGTH_SHORT)
+                            .setAction("Ver Favoritos", v -> filtrarFavoritos())
+                            .show();
+                    getSupportFragmentManager().beginTransaction().setReorderingAllowed(true).replace(R.id.fragmentContainerView, new FavoritosFragment()).commit();
+                } else if (item.getItemId() == R.id.ic_usuario) {
+                    getSupportFragmentManager().beginTransaction().add(R.id.fragmentContainerView, new UsuarioFragment()).commit();
+                }
+                return true;
+            }
+        });
+
         // Uso del Switch para cambiar el modo de tema claro/oscuro
         switchModo = findViewById(R.id.switchModo);
         switchModo.setOnClickListener(view -> mostrarMensaje("Ha cambiado de modo"));
@@ -106,8 +133,7 @@ public class MainActivity extends AppCompatActivity implements ProductoAdapter.O
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
             }
         });
-        // Barra inferior con un TabLayout
-        TabLayout tabLayout = findViewById(R.id.tabLayout);
+       /* TabLayout tabLayout = findViewById(R.id.tabLayout);
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
@@ -143,7 +169,7 @@ public class MainActivity extends AppCompatActivity implements ProductoAdapter.O
             public void onTabReselected(TabLayout.Tab tab) {
                 // Acción al volver a seleccionar una pestaña
             }
-        });
+        });*/
     }
 
     // Muestra un mensaje en la pantalla (Toast)
