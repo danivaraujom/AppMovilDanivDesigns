@@ -114,12 +114,10 @@ public class MainActivity extends AppCompatActivity implements ProductoAdapter.O
                     Snackbar.make(btnNav, "Favoritos seleccionados", Snackbar.LENGTH_SHORT)
                             .setAction("Ver Favoritos", v -> filtrarFavoritos())
                             .show();
-                    FavoritosFragment fragmentFavorito= new FavoritosFragment();
-                    getSupportFragmentManager().beginTransaction().setReorderingAllowed(true).replace(R.id.fragmentContainerView, fragmentFavorito).commit();
+                    getSupportFragmentManager().beginTransaction().setReorderingAllowed(true).replace(R.id.fragmentContainerView, FavoritosFragment.class,null).commit();
 
                 } else if (item.getItemId() == R.id.ic_usuario) {
-                    UsuarioFragment fragmentUsuario= new UsuarioFragment();
-                    getSupportFragmentManager().beginTransaction().setReorderingAllowed(true).replace(R.id.fragmentContainerView, fragmentUsuario).commit();
+                    getSupportFragmentManager().beginTransaction().setReorderingAllowed(true).replace(R.id.fragmentContainerView,UsuarioFragment.class,null).commit();
                 }
                 return true;
             }
