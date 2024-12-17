@@ -75,11 +75,6 @@ public class MainActivity extends AppCompatActivity implements ProductoAdapter.O
                 new Producto("Pulsera de Aventurina", "Pulsera con piedras de aventurina verde, conocida por atraer la prosperidad.", 10.99, R.drawable.pulsera15, false,"pulsera"),
                 new Producto("Pulsera Floral", "Pulsera con cuentas en forma de pequeñas flores y colores suaves.", 6.49, R.drawable.pulsera16, false,"pulsera")
         ));
-
-        // Fragment en el recycler
-//        BlankFragment fragmentoLista= new BlankFragment(listaProductos);
-//        getSupportFragmentManager().beginTransaction().add(R.id.fragmentContainerView,fragmentoLista).commit();
-
         cestaProductos = new ArrayList<>();
         adaptadorProductos = new ProductoAdapter(listaProductos, this, this, null);
         recyclerView.setAdapter(adaptadorProductos);
@@ -100,24 +95,31 @@ public class MainActivity extends AppCompatActivity implements ProductoAdapter.O
         // Buscador deshabilitado (funcionalidad no implementada)
         SearchView iconoBuscarLista = findViewById(R.id.buscador);
 
-        // Barra inferior de Navegacion
+        // Barra inferior de Navegacion con sus fragments
         BottomNavigationView btnNav= findViewById(R.id.bottomNavigationView);
         btnNav.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 if (item.getItemId()==R.id.ic_home1) {
                     adaptadorProductos.actualizarLista(listaProductos);
-                    getSupportFragmentManager().beginTransaction().setReorderingAllowed(true).replace(R.id.fragmentContainerView, new BlankFragment(listaProductos)).commit();
+                    BlankFragment fragmentBlank= new BlankFragment(listaProductos);
+                    getSupportFragmentManager().beginTransaction().setReorderingAllowed(true).replace(R.id.fragmentContainerView, fragmentBlank).commit();
+
                 } else if (item.getItemId()==R.id.ic_cesta) {
                     mostrarProductosCesta();
-                    getSupportFragmentManager().beginTransaction().setReorderingAllowed(true).add(R.id.fragmentContainerView, new CestaFragment(cestaProductos)).commit();
+                    CestaFragment fragmentCesta= new CestaFragment(cestaProductos);
+                    getSupportFragmentManager().beginTransaction().setReorderingAllowed(true).replace(R.id.fragmentContainerView, fragmentCesta).commit();
+
                 } else if (item.getItemId()==R.id.ic_favoritos) {
                     Snackbar.make(btnNav, "Favoritos seleccionados", Snackbar.LENGTH_SHORT)
                             .setAction("Ver Favoritos", v -> filtrarFavoritos())
                             .show();
-                    getSupportFragmentManager().beginTransaction().setReorderingAllowed(true).replace(R.id.fragmentContainerView, new FavoritosFragment()).commit();
+                    FavoritosFragment fragmentFavorito= new FavoritosFragment();
+                    getSupportFragmentManager().beginTransaction().setReorderingAllowed(true).replace(R.id.fragmentContainerView, fragmentFavorito).commit();
+
                 } else if (item.getItemId() == R.id.ic_usuario) {
-                    getSupportFragmentManager().beginTransaction().add(R.id.fragmentContainerView, new UsuarioFragment()).commit();
+                    UsuarioFragment fragmentUsuario= new UsuarioFragment();
+                    getSupportFragmentManager().beginTransaction().setReorderingAllowed(true).replace(R.id.fragmentContainerView, fragmentUsuario).commit();
                 }
                 return true;
             }
@@ -133,43 +135,6 @@ public class MainActivity extends AppCompatActivity implements ProductoAdapter.O
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
             }
         });
-       /* TabLayout tabLayout = findViewById(R.id.tabLayout);
-        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                int position = tab.getPosition();
-                switch (position) {
-                    case 0:
-                        adaptadorProductos.actualizarLista(listaProductos);
-                        break;
-                    case 1:
-                        mostrarProductosCesta();
-                        break;
-                    case 2:
-                        Snackbar.make(tabLayout, "Favoritos seleccionados", Snackbar.LENGTH_SHORT)
-                                .setAction("Ver Favoritos", v -> filtrarFavoritos())
-                                .show();
-                        break;
-                    case 3:
-                        Snackbar.make(tabLayout, "Perfil de Usuario", Snackbar.LENGTH_SHORT)
-                                .setAction("Editar Perfil", v -> mostrarMensaje("Perfil de usuario deshabilitado"))
-                                .show();
-                        break;
-                    default:
-                        break;
-                }
-
-            }
-
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-                // Acción al deseleccionar una pestaña
-            }
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-                // Acción al volver a seleccionar una pestaña
-            }
-        });*/
     }
 
     // Muestra un mensaje en la pantalla (Toast)
